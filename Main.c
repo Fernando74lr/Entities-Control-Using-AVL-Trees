@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "Entity.h"
 
 void delay(int number_of_seconds) { 
     // Converting time into milli_seconds.
@@ -13,6 +14,11 @@ void delay(int number_of_seconds) {
 
 void menu_options() {
 	int option;
+	struct client *root = NULL;
+	char * plates_ba = malloc(sizeof(char) * 1024);
+	char * plate = plates_ba;
+	struct client *ba_root = root;
+	int clients;
 	do {
 		printf("\nMenu:\n");
 		printf("0. Salir\n");
@@ -23,7 +29,7 @@ void menu_options() {
 		printf("5. Reporte total.\n");
 		printf("6. Buscar.\n");
 		printf("7. Herramientas administrativas.\n");
-		printf("\nOpcion:");
+		printf("\nOpcion: ");
 		scanf("%d", &option);
 		fflush(stdin);
 		switch(option) {
@@ -37,6 +43,15 @@ void menu_options() {
 				delay(1);
 				break;
 			case 1:
+				root = insert(root, 10, "A"); 
+				root = insert(root, 20, "B"); 
+				root = insert(root, 30, "D"); 
+				root = insert(root, 40, "E"); 
+				root = insert(root, 50, "F"); 
+				root = insert(root, 25, "C");
+				printf("Preorder traversal of the constructed AVL tree is:\n"); 
+				preOrder(root);
+				printf("\n");
 				break;
 			case 2:
 				break;
