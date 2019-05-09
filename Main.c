@@ -69,11 +69,20 @@ void menu_options() {
 				printf("\n");
 				break;
 			case 2:
-				printf("Placa del cliente a eliminar: ");
-			    root = deleteNode(root, strdup(gets(plate)));
-			    printf("Eliminado exitosamente.\n");
+				printf("Deseas solo deshabilitar o eliminar permanentemente? (0=deshabilitar, 1=eliminar): \n");
+				plate = strdup(gets(word));
+				if (strcmp(plate, "0") == 0) {
+					printf("Placa del cliente a deshabilitar: ");
+					plate = strdup(gets(word));
+					root = disable_entity(root, plate);
+					printf("Deshabilitado exitosamente.\n");
+				} else if (strcmp(plate, "1") == 0) {
+					printf("Placa del cliente a eliminar permanentemente: ");
+					plate = strdup(gets(word));
+					root = deleteNode(root, plate);
+					printf("Eliminado permanente exitoso.\n");
+				}
 			    preOrder(root);
-			    // fflush(stdin);
 			    printf("\n");
 				break;
 			case 3:
@@ -116,6 +125,14 @@ void menu_options() {
 
 				break;
 			case 4:
+				printf("Placa del cliente que quieres recuperar: \n");
+				plate = strdup(gets(word));
+				if (search(root, plate)==NULL)
+					printf("NO EXISTE\n");
+				else
+					root = enable_entity(root, plate);
+				preOrder(root);
+				printf("\n");
 				break;
 			case 5:
 				printf("	Elige entre las siguientes: \n");
