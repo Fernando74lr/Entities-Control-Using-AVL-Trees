@@ -137,24 +137,47 @@ void menu_options() {
 				printf("\n");
 				break;
 			case 5:
-				// printf("Elige\n");
-			printf("Placas: ");
-			plate = strdup(gets(word));
-			
-			printf("Valores menores a placa\n");
-			higher_values(root, plate);
-			flag2=0;
+				printf("Elige\n");
+				printf("	Elige entre las siguientes: \n");
+				printf("	1.  Orden Ascendente por Placas.\n");
+				printf("	2.  Orden Descendente por Placas.\n");
+				printf("	3.  Orden Ascendente por Tipo de Carro.\n");
+				printf("	4.  Orden Descendente por Tipo de Carro.\n");
+				printf("	5.  Orden Ascendente por Tipo de Servicio.\n");
+				printf("	6.  Orden Descendente por Tipo de Servicio.\n");
+				printf("	7.  Orden Ascendente por Mecanico Asignado.\n");
+				printf("	8.  Orden Descendente por Mecanico Asignado.\n");
+				printf("	9.  Orden Ascendente por Tiempo Requerido.\n");
+				printf("	10. Orden Descendente por Tiempo Requerido.\n");
+				fflush(stdin);
+				scanf("%d", &optRep);
+				switch(optRep){
+					case 1:Ascending_Order_Plate(root);
+					break;
+					case 2:Descending_Order_Plate(root);
+					break;
+					default: printf("***VALOR INVALIDO***\n");
+				}
 				break;
 			case 6:
+				//--------------------- 6.1.1
+				printf("Placa a encontrar: ");
 				find = search(root, "A");
 				printf("encontre: %s con tiempo: %i\n", find->plate,find->time_required);
-				break;
-			case 7:
-				printf("Placas: ");
+				//--------------------- 6.1.2
+				printf("Placa: ");
 				plate = strdup(gets(word));
 				printf("Valores menores a placa\n");
 				less_values(root, plate);
 				flag = 0;
+				//--------------------- 6.1.3
+				printf("Placa: ");
+				plate = strdup(gets(word));
+				printf("Valores menores a placa\n");
+				higher_values(root, plate);
+				flag2=0;
+				break;
+			case 7:
 				break;
 			default:
 				printf("Error: inserta una opcion valida.\n");
