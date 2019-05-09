@@ -15,8 +15,9 @@ void delay(int number_of_seconds) {
 } 
 
 void menu_options() {
-	int option, optRep;
+	int option;
 	struct client *root = NULL;
+	struct client *node;
 
 	char * plate;
 	char * car_type;
@@ -92,13 +93,13 @@ void menu_options() {
 				printf("Buscando...\n");
 				printf("\nValores encontrados...\n");
 				printf("Placas: ");
-				print_string(find->plate);
+				print_string_p(find->plate);
 				printf("\nTipo de carro: "); //////empieza con NULL debida a la función insertar
-				print_string(find->car_type);
+				print_string_p(find->car_type);
 				printf("\nTipo de servicio: ");
-				print_string(find->service_type);
+				print_string_p(find->service_type);
 				printf("\nMecanico asignado: ");
-				print_string(find->assigned_mechanic);
+				print_string_p(find->assigned_mechanic);
 				printf("\nTiempo requerido: %i \n\n", find->time_required);
 
 				printf("Introduce los nuevos valores...\n");
@@ -115,13 +116,13 @@ void menu_options() {
 
 				printf("\nValores nuevos...\n");
 				printf("Placas: ");
-				print_string(find->plate);
+				print_string_p(find->plate);
 				printf("\nTipo de carro: ");
-				print_string(find->car_type);
+				print_string_p(find->car_type);
 				printf("\nTipo de servicio: ");
-				print_string(find->service_type);
+				print_string_p(find->service_type);
 				printf("\nMecanico asignado: ");
-				print_string(find->assigned_mechanic);
+				print_string_p(find->assigned_mechanic);
 				printf("\nTiempo requerido: %i \n\n", find->time_required);
 
 				break;
@@ -136,33 +137,24 @@ void menu_options() {
 				printf("\n");
 				break;
 			case 5:
-				printf("	Elige entre las siguientes: \n");
-				printf("	1.  Orden Ascendente por Placas.\n");
-				printf("	2.  Orden Descendente por Placas.\n");
-				printf("	3.  Orden Ascendente por Tipo de Carro.\n");
-				printf("	4.  Orden Descendente por Tipo de Carro.\n");
-				printf("	5.  Orden Ascendente por Tipo de Servicio.\n");
-				printf("	6.  Orden Descendente por Tipo de Servicio.\n");
-				printf("	7.  Orden Ascendente por Mecanico Asignado.\n");
-				printf("	8.  Orden Descendente por Mecanico Asignado.\n");
-				printf("	9.  Orden Ascendente por Tiempo Requerido.\n");
-				printf("	10. Orden Descendente por Tiempo Requerido.\n");
-				fflush(stdin);
-				scanf("%d", &optRep);
-				switch(optRep){
-					case 1:Ascending_Order_Plate(root);
-					break;
-					case 2:Descending_Order_Plate(root);
-					break;
-					default: printf("***VALOR INVALIDO***\n");
-				}
+				// printf("Elige\n");
+			printf("Placas: ");
+			plate = strdup(gets(word));
+			
+			printf("Valores menores a placa\n");
+			higher_values(root, plate);
+			flag2=0;
 				break;
 			case 6:
-
 				find = search(root, "A");
 				printf("encontre: %s con tiempo: %i\n", find->plate,find->time_required);
 				break;
 			case 7:
+				printf("Placas: ");
+				plate = strdup(gets(word));
+				printf("Valores menores a placa\n");
+				less_values(root, plate);
+				flag = 0;
 				break;
 			default:
 				printf("Error: inserta una opcion valida.\n");
