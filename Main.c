@@ -15,9 +15,9 @@ void delay(int number_of_seconds) {
 void menu_options() {
 	int option;
 	struct client *root = NULL;
-	char * plates_ba = malloc(sizeof(char) * 1024);
-	char * plate = plates_ba;
-	struct client *ba_root = root;
+	int time_required; // in hours.
+	struct client* find;
+	char* word;
 	int clients;
 	do {
 		printf("\nMenu:\n");
@@ -56,6 +56,42 @@ void menu_options() {
 			case 2:
 				break;
 			case 3:
+				printf("Introduce las placas del auto: \n");
+				find = search(root, strdup(gets(word)));
+				printf("Buscando...\n");
+				printf("\nValores encontrados...\n");
+				printf("Placas: ");
+				print_string(find->plate);
+				// printf("\nTipo de carro: "); //////empieza con NULL debida a la función insertar
+				// print_string(find->car_type);
+				// printf("\nTipo de servicio: ");
+				// print_string(find->service_type);
+				// printf("\nMecanico asignado: ");
+				// print_string(find->assigned_mechanic);
+				printf("\nTiempo requerido: %i \n\n", find->time_required);
+
+				printf("Introduce los nuevos valores...\n");
+				printf("\nTipo de carro: ");
+				find->car_type = strdup(gets(word));
+				printf("\nTipo de servicio: ");
+				find->service_type = strdup(gets(word));
+				printf("\nMecanico asignado: ");
+				find->assigned_mechanic = strdup(gets(word));
+				fflush(stdin);
+				printf("\nTiempo requerido: ");
+				scanf("%d",&time_required);
+				find->time_required = time_required;
+
+				printf("\nValores nuevos...\n");
+				printf("Placas: ");
+				print_string(find->plate);
+				printf("\nTipo de carro: ");
+				print_string(find->car_type);
+				printf("\nTipo de servicio: ");
+				print_string(find->service_type);
+				printf("\nMecanico asignado: ");
+				print_string(find->assigned_mechanic);
+				printf("\nTiempo requerido: %i \n\n", find->time_required);
 				break;
 			case 4:
 				break;
