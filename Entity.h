@@ -185,6 +185,14 @@ void print_string(char * word) {
     }
 }
 
+void print_string_p(char * word) {
+    char * ptc = word;
+    while(*ptc) {
+        printf("%c", *ptc);
+        ptc++;
+    }
+}
+
 // A utilitmedium function to print preorder traversal 
 // of the tree. 
 // The function also prints height_tree of evermedium client 
