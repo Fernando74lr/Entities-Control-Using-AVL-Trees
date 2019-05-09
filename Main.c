@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "Entity.h"
+#include "Search.h"
 
 void delay(int number_of_seconds) { 
     // Converting time into milli_seconds.
@@ -15,11 +16,18 @@ void delay(int number_of_seconds) {
 void menu_options() {
 	int option;
 	struct client *root = NULL;
-	int time_required; // in hours.
+
+	char * plate;
+	char * car_type;
+	char * service_type;
+	char * assigned_mechanic;
+    int time_required; // in hours.
+
 	struct client* find;
+	int clients, p;
 	char* word;
-	int clients;
 	do {
+		fflush(stdin);
 		printf("\nMenu:\n");
 		printf("0. Salir\n");
 		printf("1. Insertar nueva entidad.\n");
@@ -43,17 +51,30 @@ void menu_options() {
 				delay(1);
 				break;
 			case 1:
-				root = insert(root, 10, "A"); 
-				root = insert(root, 20, "B"); 
-				root = insert(root, 30, "D"); 
-				root = insert(root, 40, "E"); 
-				root = insert(root, 50, "F"); 
-				root = insert(root, 25, "C");
-				printf("Preorder traversal of the constructed AVL tree is:\n"); 
+				printf("\nIntroduce los datos...\n\n");
+				printf("Placa: ");
+				plate = strdup(gets(word));
+				printf("Tipo de carro: ");
+				car_type = strdup(gets(word));
+				printf("Tipo de servicio: ");
+				service_type = strdup(gets(word));
+				printf("Mecanico asignado: ");
+				assigned_mechanic = strdup(gets(word));
+				fflush(stdin);
+				printf("Tiempo requerido: ");
+				scanf("%d",&time_required);
+				root = insert(root, plate ,car_type, service_type, assigned_mechanic, time_required);
+				printf("El ordenamiento previo del recorrido del arbol AVL construido es:\n"); 
 				preOrder(root);
 				printf("\n");
 				break;
 			case 2:
+				printf("Placa del cliente a eliminar: ");
+			    root = deleteNode(root, strdup(gets(plate)));
+			    printf("Eliminado exitosamente.\n");
+			    preOrder(root);
+			    // fflush(stdin);
+			    printf("\n");
 				break;
 			case 3:
 				printf("Introduce las placas del auto: \n");
@@ -62,12 +83,12 @@ void menu_options() {
 				printf("\nValores encontrados...\n");
 				printf("Placas: ");
 				print_string(find->plate);
-				// printf("\nTipo de carro: "); //////empieza con NULL debida a la función insertar
-				// print_string(find->car_type);
-				// printf("\nTipo de servicio: ");
-				// print_string(find->service_type);
-				// printf("\nMecanico asignado: ");
-				// print_string(find->assigned_mechanic);
+				printf("\nTipo de carro: "); //////empieza con NULL debida a la función insertar
+				print_string(find->car_type);
+				printf("\nTipo de servicio: ");
+				print_string(find->service_type);
+				printf("\nMecanico asignado: ");
+				print_string(find->assigned_mechanic);
 				printf("\nTiempo requerido: %i \n\n", find->time_required);
 
 				printf("Introduce los nuevos valores...\n");
@@ -92,12 +113,17 @@ void menu_options() {
 				printf("\nMecanico asignado: ");
 				print_string(find->assigned_mechanic);
 				printf("\nTiempo requerido: %i \n\n", find->time_required);
+
 				break;
 			case 4:
 				break;
 			case 5:
+				printf("Elige\n");
 				break;
 			case 6:
+
+				find = search(root, "A");
+				printf("encontre: %s con tiempo: %i\n", find->plate,find->time_required);
 				break;
 			case 7:
 				break;
