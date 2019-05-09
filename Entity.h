@@ -5,11 +5,11 @@
 struct client { 
     int height_tree;
     int enable;
-    int time_required; // in hours.
     char * plate; // Example: TXG-D93
     char * car_type; // sedan, truck, familmedium, pick-up, etc.
     char * service_type; // 15, 30 or 50 km
     char * assigned_mechanic;
+    int time_required; // in hours.
     struct client *left;
     struct client *right;
 };
@@ -31,12 +31,13 @@ int max(int a, int b) {
   
 /* Helper function that allocates a new client with the given time_required and 
     NULL left and right pointers. */
-struct client* create_client(int time_required, char * plate) { 
+struct client* create_client(char * plate, char * car_type, char * service_type, char * assigned_mechanic, int time_required) { 
     struct client* client = (struct client*) malloc(sizeof(struct client)); 
-    client->time_required = time_required;
     client->plate = plate;
-    client->car_type = NULL;
-    client->service_type = NULL;
+    client->car_type = car_type;
+    client->service_type = service_type;
+    client->assigned_mechanic = assigned_mechanic;
+    client->time_required = time_required;
     client->left = NULL; 
     client->right = NULL; 
     client->height_tree = 1;  // new client is initiallmedium added at leaf 
@@ -88,10 +89,10 @@ int getBalance(struct client *node) {
   
 // Recursive function to insert a time_required in the subtree rooted 
 // with client and returns the new root of the subtree. 
-struct client* insert(struct client* client, int time_required, char * plate) {
+struct client* insert(struct client* client, char * plate, char * car_type, char * service_type, char * assigned_mechanic, int time_required) {
     /* 1.  Perform the normal BST insertion */
     if (client == NULL) 
-        return(create_client(time_required, plate)); 
+        return(create_client(plate, car_type, service_type, assigned_mechanic, time_required)); 
   
     // -------------------BORRAR DE AQUÍ-------------------
 
@@ -105,9 +106,9 @@ struct client* insert(struct client* client, int time_required, char * plate) {
     // -------------------BORRAR HASTA AQUÍ-------------------
 
     if (strcmp(plate, client->plate) < 0) 
-        client->left  = insert(client->left, time_required, plate); 
+        client->left  = insert(client->left, plate, car_type, service_type, assigned_mechanic, time_required); 
     else if (strcmp(plate, client->plate) > 0) 
-        client->right = insert(client->right, time_required, plate); 
+        client->right = insert(client->right, plate, car_type, service_type, assigned_mechanic, time_required);
     else {
         printf("Ya existe el cliente que quieres agregar.\n");
         return client;
@@ -170,7 +171,7 @@ struct client* insert(struct client* client, int time_required, char * plate) {
 
     /* return the (unchanged) client pointer */
     return client; 
-} 
+}
 
 // print a "String".
 void print_string(char * word) {
