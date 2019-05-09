@@ -14,7 +14,7 @@ void delay(int number_of_seconds) {
 } 
 
 void menu_options() {
-	int option;
+	int option, optRep;
 	struct client *root = NULL;
 
 	char * plate;
@@ -118,7 +118,26 @@ void menu_options() {
 			case 4:
 				break;
 			case 5:
-				printf("Elige\n");
+				printf("	Elige entre las siguientes: \n");
+				printf("	1.  Orden Ascendente por Placas.\n");
+				printf("	2.  Orden Descendente por Placas.\n");
+				printf("	3.  Orden Ascendente por Tipo de Carro.\n");
+				printf("	4.  Orden Descendente por Tipo de Carro.\n");
+				printf("	5.  Orden Ascendente por Tipo de Servicio.\n");
+				printf("	6.  Orden Descendente por Tipo de Servicio.\n");
+				printf("	7.  Orden Ascendente por Mecanico Asignado.\n");
+				printf("	8.  Orden Descendente por Mecanico Asignado.\n");
+				printf("	9.  Orden Ascendente por Tiempo Requerido.\n");
+				printf("	10. Orden Descendente por Tiempo Requerido.\n");
+				fflush(stdin);
+				scanf("%d", &optRep);
+				switch(optRep){
+					case 1:Ascending_Order_Plate(root);
+					break;
+					case 2:Descending_Order_Plate(root);
+					break;
+					default: printf("***VALOR INVALIDO***\n");
+				}
 				break;
 			case 6:
 
