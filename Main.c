@@ -3,6 +3,7 @@
 #include <time.h>
 #include "Entity.h"
 #include "Search.h"
+#include "Report.h"
 
 void delay(int number_of_seconds) { 
     // Converting time into milli_seconds.
