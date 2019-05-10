@@ -97,10 +97,68 @@ int word_compare(struct client* node, char * word) {
 	return show;
 }
 
-void exact_match_substring(struct client* node, char * word) {
+int length_word(char * word) {
+    printf("LENGTH WORD\n");
+    int n = 0;
+    while(*word) {
+    	n++;
+    }
+    return n;
+}
+
+int at_least_subword(char * word1, char * word2) {
+    int n = 0;
+    for (int i = 0; i < strlen(word1); ++i) {
+        if (*word1 == *word2)
+            n++;
+        word1++;
+        word2++;
+    }
+    if (n>=2)
+    	return 1;
+    else
+    	return 0;
+}
+
+int subword_compare(struct client* node, char * word) {
+	int show = 0;
+	if (at_least_subword(node->plate, word) == 1)
+		return show = 1;
+	if (at_least_subword(node->car_type, word) == 1)
+		return show = 1;
+	if (at_least_subword(node->service_type, word) == 1)
+		return show = 1;
+	if (at_least_subword(node->assigned_mechanic, word) == 1)
+		return show = 1;
+	return show;
+}
+
+void exact_match(struct client* node, char * word) {
 	struct client * temp = node;
     if(temp != NULL) {
         if (word_compare(temp, word) == 1) { //temp->disable == 0)
+            printf("---------------------------------------------\n");
+            printf("Placas: ");
+        	print_string_p(node->plate);
+        	printf("\nTipo de carro: ");
+        	print_string_p(node->car_type);
+        	printf("\nTipo de servicio: ");
+        	print_string_p(node->service_type);
+        	printf("\nMecanico asignado: ");
+        	print_string_p(node->assigned_mechanic);
+        	printf("\nTiempo requerido: %i \n\n", node->time_required); 
+        	printf("---------------------------------------------\n");
+        	printf("\n");
+        }
+        exact_match(temp->left, word);
+        exact_match(temp->right, word);
+    }
+}
+
+void exact_match_substring(struct client* node, char * word) {
+	struct client * temp = node;
+    if(temp != NULL) {
+        if (subword_compare(temp, word) == 1) {
             printf("---------------------------------------------\n");
             printf("Placas: ");
         	print_string_p(node->plate);
