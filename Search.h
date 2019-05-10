@@ -82,3 +82,39 @@ void less_values(struct client* node, char * plate) {
      /* now recur on right child */
      less_values(node->right, plate); 
 }
+
+
+int word_compare(struct client* node, char * word) {
+	int show = 0;
+	if (strcmp(node->plate, word) == 0)
+		return show = 1;
+	if (strcmp(node->car_type, word) == 0)
+		return show = 1;
+	if (strcmp(node->service_type, word) == 0)
+		return show = 1;
+	if (strcmp(node->assigned_mechanic, word) == 0)
+		return show = 1;
+	return show;
+}
+
+void exact_match_substring(struct client* node, char * word) {
+	struct client * temp = node;
+    if(temp != NULL) {
+        if (word_compare(temp, word) == 1) { //temp->disable == 0)
+            printf("---------------------------------------------\n");
+            printf("Placas: ");
+        	print_string_p(node->plate);
+        	printf("\nTipo de carro: ");
+        	print_string_p(node->car_type);
+        	printf("\nTipo de servicio: ");
+        	print_string_p(node->service_type);
+        	printf("\nMecanico asignado: ");
+        	print_string_p(node->assigned_mechanic);
+        	printf("\nTiempo requerido: %i \n\n", node->time_required); 
+        	printf("---------------------------------------------\n");
+        	printf("\n\n");
+        }
+        exact_match_substring(temp->left, word);
+        exact_match_substring(temp->right, word);
+    }
+}
