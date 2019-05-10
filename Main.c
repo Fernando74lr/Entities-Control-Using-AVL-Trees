@@ -24,6 +24,8 @@ void menu_options() {
 	char * service_type;
 	char * assigned_mechanic;
     int time_required, option_6; // in hours.
+    char* nombreArchivo;
+    char* nombreArchivoC;
 
 	struct client* find;
 	int clients, p;
@@ -195,9 +197,13 @@ void menu_options() {
 						printf("Referencia: ");
 						plate = strdup(gets(word));
 						printf("Clientes con esa referencia: \n\n");
-						exact_match_substring(root, plate);
+						exact_match(root, plate);
 						break;
 					case 5:
+						printf("Referencia: ");
+						plate = strdup(gets(word));
+						printf("Clientes con ese pedazo de referencia: \n\n");
+						exact_match_substring(root, plate);
 						break;
 					default:
 						printf("Error: inserta una opcion valida.\n");
