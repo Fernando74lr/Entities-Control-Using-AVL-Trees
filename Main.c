@@ -17,8 +17,7 @@ void delay(int number_of_seconds) {
 void menu_options() {
 	int option, optRep;
 	struct client *root = NULL;
-	struct client *node;
-
+	struct client *node = root;
 	char * plate;
 	char * car_type;
 	char * service_type;
@@ -30,6 +29,8 @@ void menu_options() {
 	struct client* find;
 	int clients, p;
 	char* word;
+	// struct node * head = NULL;
+
 	do {
 		fflush(stdin);
 		printf("\nMenu:\n");
@@ -70,6 +71,8 @@ void menu_options() {
 				root = insert(root, plate ,car_type, service_type, assigned_mechanic, time_required);
 				printf("El ordenamiento previo del recorrido del arbol AVL construido es:\n"); 
 				preOrder(root);
+				insert_at_the_end(&node, plate, car_type, service_type, assigned_mechanic, time_required);
+				// print(node);
 				printf("\n");
 				break;
 			case 2:
@@ -139,28 +142,59 @@ void menu_options() {
 				printf("\n");
 				break;
 			case 5:
-				printf("Elige\n");
-				printf("	Elige entre las siguientes: \n");
-				printf("	1.  Orden Ascendente por Placas.\n");
-				printf("	2.  Orden Descendente por Placas.\n");
-				printf("	3.  Orden Ascendente por Tipo de Carro.\n");
-				printf("	4.  Orden Descendente por Tipo de Carro.\n");
-				printf("	5.  Orden Ascendente por Tipo de Servicio.\n");
-				printf("	6.  Orden Descendente por Tipo de Servicio.\n");
-				printf("	7.  Orden Ascendente por Mecanico Asignado.\n");
-				printf("	8.  Orden Descendente por Mecanico Asignado.\n");
-				printf("	9.  Orden Ascendente por Tiempo Requerido.\n");
-				printf("	10. Orden Descendente por Tiempo Requerido.\n");
-				fflush(stdin);
-				scanf("%d", &optRep);
-				switch(optRep){
+				printf("\nReporte Total: \n");
+				printf("1. Orden Ascendente por Placas.\n");
+				printf("2. Orden Descendente por Placas.\n");
+				printf("3. Orden Ascendente por Tipo de Carro.\n");
+				printf("4. Orden Descendente por Tipo de Carro.\n");
+				printf("5. Orden Ascendente por Tipo de Servicio.\n");
+				printf("6. Orden Descendente por Tipo de Servicio.\n");
+				printf("7. Orden Ascendente por Mecanico Asignado.\n");
+				printf("8. Orden Descendente por Mecanico Asignado.\n");
+				printf("9. Orden Ascendente por Tiempo Requerido.\n");
+				printf("10. Orden Descendente por Tiempo Requerido.\n");
+				plate = strdup(gets(word));
+				switch(atoi(plate)) {
 					case 1:
 						Ascending_Order_Plate(root);
 						break;
 					case 2:
 						Descending_Order_Plate(root);
 						break;
-					default: printf("***VALOR INVALIDO***\n");
+					case 3:
+						ascending_sort_the_elements(&node, 1);
+						print(node);
+						break;
+					case 4:
+						descending_sort_the_elements(&node, 1);
+						print(node);
+						break;
+					case 5:
+						ascending_sort_the_elements(&node, 2);
+						print(node);
+						break;
+					case 6:
+						descending_sort_the_elements(&node, 2);
+						print(node);
+						break;
+					case 7:
+						ascending_sort_the_elements(&node, 3);
+						print(node);
+						break;
+					case 8:
+						descending_sort_the_elements(&node, 3);
+						print(node);
+						break;
+					case 9:
+						ascending_sort_the_elements(&node, 4);
+						print(node);
+						break;
+					case 10:
+						descending_sort_the_elements(&node, 4);
+						print(node);
+						break;
+					default:
+						printf("Error: inserta una opcion valida.\n");
 				}
 				break;
 			case 6:
