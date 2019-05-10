@@ -15,7 +15,7 @@ void delay(int number_of_seconds) {
 } 
 
 void menu_options() {
-	int option;
+	int option, optRep;
 	struct client *root = NULL;
 	struct client *node;
 
@@ -23,7 +23,7 @@ void menu_options() {
 	char * car_type;
 	char * service_type;
 	char * assigned_mechanic;
-    int time_required; // in hours.
+    int time_required, option_6; // in hours.
 
 	struct client* find;
 	int clients, p;
@@ -152,30 +152,56 @@ void menu_options() {
 				fflush(stdin);
 				scanf("%d", &optRep);
 				switch(optRep){
-					case 1:Ascending_Order_Plate(root);
-					break;
-					case 2:Descending_Order_Plate(root);
-					break;
+					case 1:
+						Ascending_Order_Plate(root);
+						break;
+					case 2:
+						Descending_Order_Plate(root);
+						break;
 					default: printf("***VALOR INVALIDO***\n");
 				}
 				break;
 			case 6:
-				//--------------------- 6.1.1
-				printf("Placa a encontrar: ");
-				find = search(root, "A");
-				printf("encontre: %s con tiempo: %i\n", find->plate,find->time_required);
-				//--------------------- 6.1.2
-				printf("Placa: ");
+				printf("\nBuscar por placa.\n");
+				printf("1. Valor exacto de la placa ingresada.\n");
+				printf("2. Valores menores o iguales a la placa ingresada.\n");
+				printf("3. Valores mayores o iguales a la placa ingresada.\n");
+				printf("\nBusca una palabra en todos los campos.\n");
+				printf("4. Buscar valor exacto de la palabra ingresada.\n");
+				printf("5. Buscar por subcadena de texto.\n");
 				plate = strdup(gets(word));
-				printf("Valores menores a placa\n");
-				less_values(root, plate);
-				flag = 0;
-				//--------------------- 6.1.3
-				printf("Placa: ");
-				plate = strdup(gets(word));
-				printf("Valores menores a placa\n");
-				higher_values(root, plate);
-				flag2=0;
+				switch(atoi(plate)) {
+					case 1:
+						printf("Placa a encontrar: ");
+						plate = strdup(gets(word));
+						find = search(root, plate);
+						printf("encontre: %s con tiempo: %i\n", find->plate,find->time_required);
+						break;
+					case 2:
+						printf("Placa: ");
+						plate = strdup(gets(word));
+						printf("Valores menores a placa\n");
+						less_values(root, plate);
+						flag = 0;
+						break;
+					case 3:
+						printf("Placa: ");
+						plate = strdup(gets(word));
+						printf("Valores menores a placa\n");
+						higher_values(root, plate);
+						flag2=0;
+						break;
+					case 4:
+						printf("Referencia: ");
+						plate = strdup(gets(word));
+						printf("Clientes con esa referencia: \n\n");
+						exact_match_substring(root, plate);
+						break;
+					case 5:
+						break;
+					default:
+						printf("Error: inserta una opcion valida.\n");
+				}
 				break;
 			case 7:
 				break;
