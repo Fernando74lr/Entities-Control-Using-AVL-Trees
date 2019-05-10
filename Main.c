@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Search.h"
 #include "Report.h"
+#include "AdministrativeTools.h"
 
 void delay(int number_of_seconds) { 
     // Converting time into milli_seconds.
@@ -244,6 +245,34 @@ void menu_options() {
 				}
 				break;
 			case 7:
+				printf("	Elige entre las siguientes: \n");
+				printf("	1.  Guardar respaldo de informacion \n");
+				printf("	2.  Cargar informacion de un archivo de respaldo.\n");
+				fflush(stdin);
+				scanf("%d", &optRep);
+				switch(optRep){
+					case 1:
+						printf("Con que nombre quieres guardar el archivo? \n");
+						fflush(stdin);
+						nombreArchivo = strdup(gets(word));
+						strcat(nombreArchivo,".txt");
+						printf("Nombre final archivo %s\n", nombreArchivo);
+						guardar(nombreArchivo,root);
+					break;
+					case 2:
+						printf("Cual es el nombre del archivo que quieres cargar?\n");
+						fflush(stdin);
+						nombreArchivoC = strdup(gets(word));
+						strcat(nombreArchivoC,".txt");
+						printf("buscare %s\n",nombreArchivoC );
+						root = eliminar(root);
+						printf("cargare...\n");
+						root=cargar(nombreArchivoC);
+
+
+					break;
+					default: printf("Opcion invalida\n");
+				}
 				break;
 			default:
 				printf("Error: inserta una opcion valida.\n");
