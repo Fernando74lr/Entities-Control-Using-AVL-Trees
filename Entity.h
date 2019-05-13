@@ -13,8 +13,17 @@ struct client {
     int time_required; // in hours.
     struct client *left;
     struct client *right;
+    struct client *next;
 };
 
+<<<<<<< HEAD
+=======
+// struct node {
+//     struct client * info;
+//     struct node * next;
+// };
+
+>>>>>>> d06e2dd53304569def4e30be5b7980e4e5c0562c
 struct client* search(struct client* root, char* find);
 // A utilitmedium function to get maximum of two integers 
 int max(int a, int b); 
@@ -194,7 +203,7 @@ void print_string_p(char * word) {
 }
 
 // A utilitmedium function to print preorder traversal 
-// of the tree. 
+// of the tree.
 // The function also prints height_tree of evermedium client 
 void preOrder(struct client *root) {
 struct client * temp = root;
@@ -323,4 +332,321 @@ struct client* deleteNode(struct client* root, char * plate) {
     } 
   
     return root; 
+<<<<<<< HEAD
 }
+=======
+}
+
+// insert an item at the end of the list.
+void insert_at_the_end(struct client * * pthead, char * plate, char * car_type, char * service_type, char * assigned_mechanic, int time_required) {
+    // printf("INSERTANDO 2....\n");
+
+    struct client * temp = malloc(sizeof(struct client));
+    struct client * last_next = *pthead;
+
+    if (*pthead == NULL) {
+        *pthead = temp;
+        temp->plate = strdup(plate);
+        temp->car_type = strdup(car_type);
+        temp->service_type = strdup(service_type);
+        temp->assigned_mechanic = strdup(assigned_mechanic);
+        temp->time_required = time_required;
+        temp->next = NULL;
+    }
+    else {
+        // printf("INSERTANDO 3....\n");
+        while(last_next->next != NULL) {
+            last_next = last_next->next;
+        }
+        last_next->next = temp;
+        temp->plate = strdup(plate);
+        temp->car_type = strdup(car_type);
+        temp->service_type = strdup(service_type);
+        temp->assigned_mechanic = strdup(assigned_mechanic);
+        temp->time_required = time_required;
+        temp->next = NULL;
+    }
+}
+
+void print(struct client * item) {
+    struct client * temp = item;
+    while(temp) {
+        printf("---------------------------------------------\n");
+        printf("Placas: ");
+        print_string_p(temp->plate);
+        printf("\nTipo de carro: ");
+        print_string_p(temp->car_type);
+        printf("\nTipo de servicio: ");
+        print_string_p(temp->service_type);
+        printf("\nMecanico asignado: ");
+        print_string_p(temp->assigned_mechanic);
+        printf("\nTiempo requerido: %i\n", temp->time_required); 
+        printf("---------------------------------------------\n");
+        // printf("\n");
+        temp = temp->next;
+    }
+    printf("\n");
+}
+
+// void recursive_print(struct client * pthead) {
+//     // printf("IMPRIMIENDO....\n");
+//     if (pthead != NULL) {
+//         printf("  ->  ");
+//         // if (strcmp(field, "placa") == 0)
+//             print_string_p(pthead->assigned_mechanic);
+//         // if (strcmp(field, "coche") == 0)
+//         //     print_string_p(pthead->car_type);
+//         // if (strcmp(field, "servicio") == 0)
+//         //     print_string_p(pthead->service_type);
+//         // if (strcmp(field, "mecanico") == 0)
+//         //     print_string_p(pthead->assigned_mechanic);
+//         recursive_print(pthead=pthead->next);
+//     }
+//     else
+//         printf("\n");
+// }
+
+void ascending_sort_the_elements(struct client * * pthead, int which_one) {
+    for (int i = 0; i < 5; ++i) {
+        char * temp;
+        int temp_int;
+        struct client * first = *pthead;
+        struct client * second;
+        while (first->next) {
+            second = first->next;
+            if (pthead == NULL)
+                printf("NULL\n");
+            else {
+                switch(which_one) {
+                    case 1:
+                        if (strcmp(first->car_type, second->car_type) >= 0) {
+                            // ----
+                            temp = strdup(first->plate);
+                            first->plate = second->plate;
+                            second->plate = strdup(temp);
+                            // ----
+                            temp = strdup(first->car_type);
+                            first->car_type = second->car_type;
+                            second->car_type = strdup(temp);
+                            // ----
+                            temp = strdup(first->service_type);
+                            first->service_type = second->service_type;
+                            second->service_type = strdup(temp);
+                            // ----
+                            temp = strdup(first->assigned_mechanic);
+                            first->assigned_mechanic = second->assigned_mechanic;
+                            second->assigned_mechanic = strdup(temp);
+                            // ----
+                            temp_int = first->time_required;
+                            first->time_required = second->time_required;
+                            second->time_required = temp_int;
+                        }
+                        break;
+                    case 2:
+                        if (strcmp(first->service_type, second->service_type) >= 0) {
+                            // ----
+                            temp = first->plate;
+                            first->plate = second->plate;
+                            second->plate = strdup(temp);
+                            // ----
+                            temp = first->car_type;
+                            first->car_type = second->car_type;
+                            second->car_type = strdup(temp);
+                            // ----
+                            temp = first->service_type;
+                            first->service_type = second->service_type;
+                            second->service_type = strdup(temp);
+                            // ----
+                            temp = first->assigned_mechanic;
+                            first->assigned_mechanic = second->assigned_mechanic;
+                            second->assigned_mechanic = strdup(temp);
+                            // ----
+                            temp_int = first->time_required;
+                            first->time_required = second->time_required;
+                            second->time_required = temp_int;
+                        }
+                        break;
+                    case 3:
+                        if (strcmp(first->assigned_mechanic, second->assigned_mechanic) >= 0) {
+                            // ----
+                            temp = first->plate;
+                            first->plate = second->plate;
+                            second->plate = strdup(temp);
+                            // ----
+                            temp = first->car_type;
+                            first->car_type = second->car_type;
+                            second->car_type = strdup(temp);
+                            // ----
+                            temp = first->service_type;
+                            first->service_type = second->service_type;
+                            second->service_type = strdup(temp);
+                            // ----
+                            temp = first->assigned_mechanic;
+                            first->assigned_mechanic = second->assigned_mechanic;
+                            second->assigned_mechanic = strdup(temp);
+                            // ----
+                            temp_int = first->time_required;
+                            first->time_required = second->time_required;
+                            second->time_required = temp_int;
+                        }
+                        break;
+                    case 4:
+                        if (first->time_required >= second->time_required) {
+                            // ----
+                            temp = first->plate;
+                            first->plate = second->plate;
+                            second->plate = strdup(temp);
+                            // ----
+                            temp = first->car_type;
+                            first->car_type = second->car_type;
+                            second->car_type = strdup(temp);
+                            // ----
+                            temp = first->service_type;
+                            first->service_type = second->service_type;
+                            second->service_type = strdup(temp);
+                            // ----
+                            temp = first->assigned_mechanic;
+                            first->assigned_mechanic = second->assigned_mechanic;
+                            second->assigned_mechanic = strdup(temp);
+                            // ----
+                            temp_int = first->time_required;
+                            first->time_required = second->time_required;
+                            second->time_required = temp_int;
+                        }
+                        break;
+                    default:
+                        printf("Error: inserta una opcion valida.\n");
+                }
+            }
+            first = first->next;
+        }
+    }
+}
+
+void descending_sort_the_elements(struct client * * pthead, int which_one) {
+    for (int i = 0; i < 5; ++i) {
+        char * temp;
+        int temp_int;
+        struct client * first = *pthead;
+        struct client * second;
+        while (first->next) {
+            second = first->next;
+            if (pthead == NULL)
+                printf("NULL\n");
+            else {
+                switch(which_one) {
+                    case 1:
+                        if (strcmp(first->car_type, second->car_type) <= 0) {
+                            // ----
+                            temp = strdup(first->plate);
+                            first->plate = second->plate;
+                            second->plate = strdup(temp);
+                            // ----
+                            temp = strdup(first->car_type);
+                            first->car_type = second->car_type;
+                            second->car_type = strdup(temp);
+                            // ----
+                            temp = strdup(first->service_type);
+                            first->service_type = second->service_type;
+                            second->service_type = strdup(temp);
+                            // ----
+                            temp = strdup(first->assigned_mechanic);
+                            first->assigned_mechanic = second->assigned_mechanic;
+                            second->assigned_mechanic = strdup(temp);
+                            // ----
+                            temp_int = first->time_required;
+                            first->time_required = second->time_required;
+                            second->time_required = temp_int;
+                        }
+                        break;
+                    case 2:
+                        if (strcmp(first->service_type, second->service_type) <= 0) {
+                            // ----
+                            temp = first->plate;
+                            first->plate = second->plate;
+                            second->plate = strdup(temp);
+                            // ----
+                            temp = first->car_type;
+                            first->car_type = second->car_type;
+                            second->car_type = strdup(temp);
+                            // ----
+                            temp = first->service_type;
+                            first->service_type = second->service_type;
+                            second->service_type = strdup(temp);
+                            // ----
+                            temp = first->assigned_mechanic;
+                            first->assigned_mechanic = second->assigned_mechanic;
+                            second->assigned_mechanic = strdup(temp);
+                            // ----
+                            temp_int = first->time_required;
+                            first->time_required = second->time_required;
+                            second->time_required = temp_int;
+                        }
+                        break;
+                    case 3:
+                        if (strcmp(first->assigned_mechanic, second->assigned_mechanic) <= 0) {
+                            // ----
+                            temp = first->plate;
+                            first->plate = second->plate;
+                            second->plate = strdup(temp);
+                            // ----
+                            temp = first->car_type;
+                            first->car_type = second->car_type;
+                            second->car_type = strdup(temp);
+                            // ----
+                            temp = first->service_type;
+                            first->service_type = second->service_type;
+                            second->service_type = strdup(temp);
+                            // ----
+                            temp = first->assigned_mechanic;
+                            first->assigned_mechanic = second->assigned_mechanic;
+                            second->assigned_mechanic = strdup(temp);
+                            // ----
+                            temp_int = first->time_required;
+                            first->time_required = second->time_required;
+                            second->time_required = temp_int;
+                        }
+                        break;
+                    case 4:
+                        if (first->time_required <= second->time_required) {
+                            // ----
+                            temp = first->plate;
+                            first->plate = second->plate;
+                            second->plate = strdup(temp);
+                            // ----
+                            temp = first->car_type;
+                            first->car_type = second->car_type;
+                            second->car_type = strdup(temp);
+                            // ----
+                            temp = first->service_type;
+                            first->service_type = second->service_type;
+                            second->service_type = strdup(temp);
+                            // ----
+                            temp = first->assigned_mechanic;
+                            first->assigned_mechanic = second->assigned_mechanic;
+                            second->assigned_mechanic = strdup(temp);
+                            // ----
+                            temp_int = first->time_required;
+                            first->time_required = second->time_required;
+                            second->time_required = temp_int;
+                        }
+                        break;
+                    default:
+                        printf("Error: inserta una opcion valida.\n");
+                }
+            }
+            first = first->next;
+        }
+    }
+}
+
+// void insert_linked_list(struct client *root) {
+//     struct client * temp_client = root;
+//     if(temp_client != NULL) {
+//         printf("INSERTANDO....\n");
+//         insert_at_the_end(&temp_client, temp_client->plate, temp_client->car_type, temp_client->service_type, temp_client->assigned_mechanic, temp_client->time_required);
+//         insert_linked_list(temp_client->left);
+//         insert_linked_list(temp_client->right);
+//     }
+// }
+>>>>>>> d06e2dd53304569def4e30be5b7980e4e5c0562c

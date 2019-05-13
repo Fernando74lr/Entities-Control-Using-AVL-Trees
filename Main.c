@@ -4,6 +4,10 @@
 #include "Entity.h"
 #include "Search.h"
 #include "Report.h"
+<<<<<<< HEAD
+=======
+#include "AdministrativeTools.h"
+>>>>>>> d06e2dd53304569def4e30be5b7980e4e5c0562c
 
 void delay(int number_of_seconds) { 
     // Converting time into milli_seconds.
@@ -15,19 +19,34 @@ void delay(int number_of_seconds) {
 } 
 
 void menu_options() {
-	int option;
+	int option, optRep;
 	struct client *root = NULL;
+<<<<<<< HEAD
 	struct client *node;
 
+=======
+	struct client *node = root;
+>>>>>>> d06e2dd53304569def4e30be5b7980e4e5c0562c
 	char * plate;
 	char * car_type;
 	char * service_type;
 	char * assigned_mechanic;
+<<<<<<< HEAD
     int time_required; // in hours.
+=======
+    int time_required, option_6; // in hours.
+    char* nombreArchivo;
+    char* nombreArchivoC;
+>>>>>>> d06e2dd53304569def4e30be5b7980e4e5c0562c
 
 	struct client* find;
 	int clients, p;
 	char* word;
+<<<<<<< HEAD
+=======
+	// struct node * head = NULL;
+
+>>>>>>> d06e2dd53304569def4e30be5b7980e4e5c0562c
 	do {
 		fflush(stdin);
 		printf("\nMenu:\n");
@@ -68,6 +87,8 @@ void menu_options() {
 				root = insert(root, plate ,car_type, service_type, assigned_mechanic, time_required);
 				printf("El ordenamiento previo del recorrido del arbol AVL construido es:\n"); 
 				preOrder(root);
+				insert_at_the_end(&node, plate, car_type, service_type, assigned_mechanic, time_required);
+				// print(node);
 				printf("\n");
 				break;
 			case 2:
@@ -137,6 +158,7 @@ void menu_options() {
 				printf("\n");
 				break;
 			case 5:
+<<<<<<< HEAD
 				// printf("Elige\n");
 			printf("Placas: ");
 			plate = strdup(gets(word));
@@ -155,6 +177,138 @@ void menu_options() {
 				printf("Valores menores a placa\n");
 				less_values(root, plate);
 				flag = 0;
+=======
+				printf("\nReporte Total: \n");
+				printf("1. Orden Ascendente por Placas.\n");
+				printf("2. Orden Descendente por Placas.\n");
+				printf("3. Orden Ascendente por Tipo de Carro.\n");
+				printf("4. Orden Descendente por Tipo de Carro.\n");
+				printf("5. Orden Ascendente por Tipo de Servicio.\n");
+				printf("6. Orden Descendente por Tipo de Servicio.\n");
+				printf("7. Orden Ascendente por Mecanico Asignado.\n");
+				printf("8. Orden Descendente por Mecanico Asignado.\n");
+				printf("9. Orden Ascendente por Tiempo Requerido.\n");
+				printf("10. Orden Descendente por Tiempo Requerido.\n");
+				plate = strdup(gets(word));
+				switch(atoi(plate)) {
+					case 1:
+						Ascending_Order_Plate(root);
+						break;
+					case 2:
+						Descending_Order_Plate(root);
+						break;
+					case 3:
+						ascending_sort_the_elements(&node, 1);
+						print(node);
+						break;
+					case 4:
+						descending_sort_the_elements(&node, 1);
+						print(node);
+						break;
+					case 5:
+						ascending_sort_the_elements(&node, 2);
+						print(node);
+						break;
+					case 6:
+						descending_sort_the_elements(&node, 2);
+						print(node);
+						break;
+					case 7:
+						ascending_sort_the_elements(&node, 3);
+						print(node);
+						break;
+					case 8:
+						descending_sort_the_elements(&node, 3);
+						print(node);
+						break;
+					case 9:
+						ascending_sort_the_elements(&node, 4);
+						print(node);
+						break;
+					case 10:
+						descending_sort_the_elements(&node, 4);
+						print(node);
+						break;
+					default:
+						printf("Error: inserta una opcion valida.\n");
+				}
+				break;
+			case 6:
+				printf("\nBuscar por placa.\n");
+				printf("1. Valor exacto de la placa ingresada.\n");
+				printf("2. Valores menores o iguales a la placa ingresada.\n");
+				printf("3. Valores mayores o iguales a la placa ingresada.\n");
+				printf("\nBusca una palabra en todos los campos.\n");
+				printf("4. Buscar valor exacto de la palabra ingresada.\n");
+				printf("5. Buscar por subcadena de texto.\n");
+				plate = strdup(gets(word));
+				switch(atoi(plate)) {
+					case 1:
+						printf("Placa a encontrar: ");
+						plate = strdup(gets(word));
+						find = search(root, plate);
+						printf("encontre: %s con tiempo: %i\n", find->plate,find->time_required);
+						break;
+					case 2:
+						printf("Placa: ");
+						plate = strdup(gets(word));
+						printf("Valores menores a placa\n");
+						less_values(root, plate);
+						flag = 0;
+						break;
+					case 3:
+						printf("Placa: ");
+						plate = strdup(gets(word));
+						printf("Valores menores a placa\n");
+						higher_values(root, plate);
+						flag2=0;
+						break;
+					case 4:
+						printf("Referencia: ");
+						plate = strdup(gets(word));
+						printf("Clientes con esa referencia: \n\n");
+						exact_match(root, plate);
+						break;
+					case 5:
+						printf("Referencia: ");
+						plate = strdup(gets(word));
+						printf("Clientes con ese pedazo de referencia: \n\n");
+						exact_match_substring(root, plate);
+						break;
+					default:
+						printf("Error: inserta una opcion valida.\n");
+				}
+				break;
+			case 7:
+				printf("	Elige entre las siguientes: \n");
+				printf("	1.  Guardar respaldo de informacion \n");
+				printf("	2.  Cargar informacion de un archivo de respaldo.\n");
+				fflush(stdin);
+				scanf("%d", &optRep);
+				switch(optRep){
+					case 1:
+						printf("Con que nombre quieres guardar el archivo? \n");
+						fflush(stdin);
+						nombreArchivo = strdup(gets(word));
+						strcat(nombreArchivo,".txt");
+						printf("Nombre final archivo %s\n", nombreArchivo);
+						guardar(nombreArchivo,root);
+					break;
+					case 2:
+						printf("Cual es el nombre del archivo que quieres cargar?\n");
+						fflush(stdin);
+						nombreArchivoC = strdup(gets(word));
+						strcat(nombreArchivoC,".txt");
+						printf("buscare %s\n",nombreArchivoC );
+						root = eliminar(root);
+						printf("cargare...\n");
+						root=cargar(nombreArchivoC);
+
+
+					break;
+					default: printf("Opcion invalida\n");
+				}
+>>>>>>> d06e2dd53304569def4e30be5b7980e4e5c0562c
 				break;
 			default:
 				printf("Error: inserta una opcion valida.\n");
